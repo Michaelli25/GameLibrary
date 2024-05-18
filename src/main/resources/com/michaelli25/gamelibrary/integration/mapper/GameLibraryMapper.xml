@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.michaelli25.GameLibrary.integration.mapper.GameLibraryMapper">
+
+  <resultMap id="GameLibraryMap" type="com.michaelli25.GameLibrary.business.GameLibrary">
+    <result property="title" column="TITLE" />
+    <result property="genre" column="GENRE" />
+    <result property="releaseDate" column="RELEASE_DATE" />
+    <result property="price" column="PRICE" />
+    <result property="ageRating" column="AGE_RATING" />
+    <result property="platforms" column="PLATFORMS" />
+    <result property="developer" column="DEVELOPER" />
+  </resultMap>
+
+  <select id="getGames" resultType="GameLibrary">
+    SELECT TITLE, GENRE, RELEASE_DATE, PRICE, AGE_RATING, PLATFORMS, DEVELOPER
+    FROM GameLibrary
+    ORDER BY TITLE
+  </select>
+
+  <select id="getGameByTitle" parameterType="string" resultMap="GameLibraryMap">
+    SELECT TITLE, GENRE, RELEASE_DATE, PRICE, AGE_RATING, PLATFORMS, DEVELOPER
+    FROM GameLibrary
+    WHERE TITLE = #{title}
+  </select>
+
+</mapper>

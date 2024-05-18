@@ -1,5 +1,6 @@
-package com.michaelli25.GameLibrary.business;
+package com.michaelli25.gamelibrary.business;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -160,6 +161,67 @@ public class GameLibrary {
      */
     public void setDeveloper(String developer) {
         this.developer = developer;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((title == null) ? 0 : title.hashCode());
+        result = prime * result + ((genre == null) ? 0 : genre.hashCode());
+        result = prime * result + ((releaseDate == null) ? 0 : releaseDate.hashCode());
+        long temp;
+        temp = Double.doubleToLongBits(price);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + ageRating;
+        result = prime * result + Arrays.hashCode(platforms);
+        result = prime * result + ((developer == null) ? 0 : developer.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        GameLibrary other = (GameLibrary) obj;
+        if (title == null) {
+            if (other.title != null)
+                return false;
+        } else if (!title.equals(other.title))
+            return false;
+        if (genre == null) {
+            if (other.genre != null)
+                return false;
+        } else if (!genre.equals(other.genre))
+            return false;
+        if (releaseDate == null) {
+            if (other.releaseDate != null)
+                return false;
+        } else if (!releaseDate.equals(other.releaseDate))
+            return false;
+        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+            return false;
+        if (ageRating != other.ageRating)
+            return false;
+        if (!Arrays.equals(platforms, other.platforms))
+            return false;
+        if (developer == null) {
+            if (other.developer != null)
+                return false;
+        } else if (!developer.equals(other.developer))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "GameLibrary [title=" + title + ", genre=" + genre + ", releaseDate=" + releaseDate + ", price=" + price
+                + ", ageRating=" + ageRating + ", platforms=" + Arrays.toString(platforms) + ", developer=" + developer
+                + "]";
     }
 
 }
